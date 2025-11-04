@@ -1,6 +1,6 @@
 /***********************************************************************
  * @file pinfo.c
- * @brief Source file which implements functions
+ * @brief Source file which implements process id system calls
  * Course: CPE2600 - 111
  * Assignment: Lab 9 - System Calls
  * Author: Zoya Mumtaz
@@ -55,6 +55,7 @@ int main(int argc, char* argv[])
         }
 
         errno = 0;
+        //get the priority
         int priority = getpriority(PRIO_PROCESS, pid);
         if (priority == -1 && errno != 0){
             //an actual error happened if both are true
@@ -62,12 +63,13 @@ int main(int argc, char* argv[])
             exit(0);
         }
 
+        //get the scheduling policy
         int policy = sched_getscheduler(pid);
         if (policy == -1){
             perror("Error");
             exit(0);
         }
-
+        //make the policy name a string
         const char* policy_name;
         if (policy == SCHED_FIFO){
             policy_name = "SCHED_FIFO";
@@ -85,12 +87,13 @@ int main(int argc, char* argv[])
             policy_name = "Unknown Scheduling Policy\n";
         }
 
-        printf("Process %d has Priority %d and Scheduling Policy %s\n", pid, priority, policy_name);
+        printf("Process ID %d has Priority %d and Scheduling Policy %s\n", pid, priority, policy_name);
 
     } else { //print info about current PID
         pid_t pid = getpid();
 
         errno = 0;
+        //get the priority
         int priority = getpriority(PRIO_PROCESS, pid);
         if (priority == -1 && errno != 0){
             //an actual error happened if both are true
@@ -98,12 +101,14 @@ int main(int argc, char* argv[])
             exit(0);
         }
 
+        //get the scheduling policy
         int policy = sched_getscheduler(pid);
         if (policy == -1){
             perror("Error");
             exit(0);
         }
 
+        //make the policy name a string
         const char* policy_name;
         if (policy == SCHED_FIFO){
             policy_name = "SCHED_FIFO";
@@ -121,7 +126,7 @@ int main(int argc, char* argv[])
             policy_name = "Unknown Scheduling Policy\n";
         }
 
-        printf("Current Process %d has Priority %d and Scheduling Policy %s \n", pid, priority, policy_name);
+        printf("Current Process ID %d has Priority %d and Scheduling Policy %s \n", pid, priority, policy_name);
 
     }
 

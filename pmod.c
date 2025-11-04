@@ -1,6 +1,6 @@
 /***********************************************************************
  * @file pmod.c
- * @brief Source file which implements functions
+ * @brief Source file which implements nice and nanosleep
  * Course: CPE2600 - 111
  * Assignment: Lab 9 - System Calls
  * Author: Zoya Mumtaz

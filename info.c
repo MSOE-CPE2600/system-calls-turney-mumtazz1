@@ -1,6 +1,6 @@
 /***********************************************************************
  * @file info.c
- * @brief Source file which implements functions
+ * @brief Source file which implements system calls to get system info
  * Course: CPE2600 - 111
  * Assignment: Lab 9 - System Calls
  * Author: Zoya Mumtaz
@@ -12,7 +12,6 @@
  *     $ ./info
  *********************************************************************/
 
-// info.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -45,8 +44,8 @@ int main(int argc, char* argv[])
     struct utsname buf;
     if (uname(&buf) == 0){
         printf("Operating system's name: %s\n", buf.sysname);
-        char hostname[256];
-        if (gethostname(hostname, 256) == 0){ 
+        char hostname[200];
+        if (gethostname(hostname, 200) == 0){ 
             printf("Network name: %s\n", hostname);
         }        
         printf("Operating system's release and version: %s %s\n", buf.release, buf.version);
